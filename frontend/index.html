@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LurkForWork</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- You can add your styles and scripts here -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/global.css"/>
+</head>
+<body>
+
+
+<main role="main" id="main" class="container mt-5">
+
+</main>
+<footer class="mt-5 text-center">
+    <p>&copy; lurkforwork.com 2023</p>
+</footer>
+
+
+<template id="login_template">
+    <div class="form-sm">
+        <h1>Login</h1>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" required name="email">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" required name="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <a class="btn btn-link" href="#register">Register</a>
+        </form>
+    </div>
+</template>
+
+<template id="register_template">
+    <div class="form-sm">
+        <h1>Register</h1>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" required name="email">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" required name="name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" required name="password">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" required name="confirm">
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+            <a class="btn btn-link" href="#login">Back to login</a>
+        </form>
+    </div>
+</template>
+
+<template id="edit_profile_template">
+    <div class="form-sm">
+        <h1>Edit Profile</h1>
+        <div class="alert alert-info" role="alert">
+            Leave a field empty to keep unchanged!
+        </div>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" name="email">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" name="confirm">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                <input accept="image/*" type="file" class="form-control" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Edit Profile</button>
+            <button class="btn btn-link back-btn" type="button">Back</button>
+        </form>
+    </div>
+</template>
+
+<template id="feed_template">
+    <h1>LurkForWork</h1>
+    <p class="welcome"></p>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link active" href="#feed">Feeds</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#add">Add New Job</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#watch">Watch User</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link my-profile" href="#profile">My Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link logout-btn" href="#">Logout</a>
+        </li>
+    </ul>
+    <hr/>
+    <h2>Jobs Feed</h2>
+    <div class="feeds">
+
+    </div>
+</template>
+
+<template id="feed_item">
+    <!--    a little bit code taken from https://getbootstrap.com/docs/5.3/components/card/-->
+    <div class="feed-card card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4 bg-secondary rounded">
+                <img class="img-fluid rounded job-img" alt="job thumb">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text"></p>
+                    <div class="card-text job-meta">
+                        <small class="text-muted">
+                            Posted by user <a class="user-link">xxx</a>
+                        </small>
+                    </div>
+                    <div class="card-text job-meta2">
+                        <small class="text-muted"></small>
+                    </div>
+                    <div class="mt-2">
+                        <button class="btn btn-link likes-num" data-bs-toggle="collapse">Likes (0)
+                        </button>
+                        <button class="btn btn-link comments-num" data-bs-toggle="collapse">Comments (0)
+                        </button>
+                        <div class="collapse likes-list mt-2">
+                            <div class="card card-body">
+                                <div class="card-title"><b>Like list:</b></div>
+                                <ul></ul>
+                            </div>
+                        </div>
+                        <div class="collapse comments-list mt-2">
+                            <div class="card card-body">
+                                <div class="card-title"><b>Comment list:</b></div>
+                                <ul></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <button class="btn btn-primary toggle-like">Like</button>
+                        <button class="btn btn-secondary toggle-comment" data-bs-toggle="collapse">Comment...</button>
+                        <button class="btn btn-warning d-none update-job">Edit</button>
+                        <button class="btn btn-danger d-none delete-job">Delete</button>
+                        <div class="collapse comment-form mt-2">
+                            <div class="card card-body">
+                                <form>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Type comment here..."
+                                               name="comment">
+                                        <button class="btn btn-outline-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="add_template">
+    <div class="form-sm">
+        <h1>Add New Job</h1>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" required name="title">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                <input type="file" accept="image/*" class="form-control" required name="image">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Start</label>
+                <input type="datetime-local" class="form-control" required name="start">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <input type="text" class="form-control" required name="description">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Job</button>
+            <a class="btn btn-link" href="#feed">Back to feeds</a>
+        </form>
+    </div>
+</template>
+
+<template id="edit_template">
+    <div class="form-sm">
+        <h1>Edit Job</h1>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" required name="title">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                <input type="file" accept="image/*" class="form-control" name="image">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Start</label>
+                <input type="datetime-local" class="form-control" required name="start">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <input type="text" class="form-control" required name="description">
+            </div>
+            <button type="submit" class="btn btn-primary">Edit Job</button>
+            <button class="btn btn-link back-btn" type="button">Back</button>
+        </form>
+    </div>
+</template>
+
+
+<template id="watch_template">
+    <div class="form-sm">
+        <h1>Watch User</h1>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" required name="email">
+            </div>
+            <button type="submit" class="btn btn-primary">Watch</button>
+            <a class="btn btn-link" href="#feed">Back to feeds</a>
+        </form>
+    </div>
+</template>
+
+<template id="profile_template">
+    <div>
+        <a href="#" class="back-btn">Go Back</a>
+        <div class="mb-4">
+            <img class="img-thumbnail avatar rounded-circle" alt="avatar">
+        </div>
+        <h1 class="mt-4"><span class="user-name"></span> <small class="user-email text-muted"></small> Profile</h1>
+        <hr/>
+        <div class="mb-4">
+            <button class="btn btn-primary watch-btn d-none">Watch this user</button>
+            <button class="btn btn-secondary unwatch-btn d-none">Unwatch this user</button>
+            <button class="btn btn-warning edit-btn d-none">Edit my profile</button>
+        </div>
+
+
+        <h4>Watchee Users</h4>
+        <ul class="watchlist"></ul>
+        <div class="alert alert-warning no-watch d-none" role="alert">
+            This user has no watchees yet!
+        </div>
+
+        <h4>Posted Jobs</h4>
+        <div class="jobs"></div>
+        <div class="alert alert-warning no-jobs d-none" role="alert">
+            This user has not posted any jobs yet!
+        </div>
+    </div>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
